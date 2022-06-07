@@ -134,11 +134,11 @@ void SimpleHydrodynamics::Configure(const Entity &_entity,
       topicName = _sdf->Get<std::string>("topic_name");
   }
   
-  std::string linpubtopic{topicName + "/world_vel/linear"};         
+  std::string linpubtopic{"model/" + topicName + "/world_vel/linear"};         
   this->linear_pub = node.Advertise<ignition::msgs::Vector3d>(linpubtopic);
-  std::string angpubtopic{topicName + "/world_vel/angular"};         
+  std::string angpubtopic{"model/" + topicName + "/world_vel/angular"};         
   this->angular_pub = node.Advertise<ignition::msgs::Vector3d>(angpubtopic);
-  std::string posepubtopic{topicName + "/world_pose"};
+  std::string posepubtopic{"model/" + topicName + "/world_pose"};
   this->pose_pub = node.Advertise<ignition::msgs::Pose>(posepubtopic);
 
   this->dataPtr->link.EnableVelocityChecks(_ecm);
