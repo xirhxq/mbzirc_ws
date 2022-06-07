@@ -73,6 +73,16 @@ int main(int argc, char * argv[])
   }
 
 
+  for (int j = 0; j < 3; j++){
+      std::string topic_name = "model/USV" + subtopic_name[j];
+      handles.push_back(
+              std::make_unique<ros_ign_bridge::BridgeIgnToRos>(
+                      ros_node, ign_node,
+                      ros_type[j], topic_name,
+                      ign_type[j], topic_name
+                      )
+              );
+  }
 
 
   for (auto & bridge : handles) {
