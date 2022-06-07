@@ -1,3 +1,0 @@
-prepend-non-duplicate;IGN_GAZEBO_RESOURCE_PATH;/home/bit/mbzirc_ws/install/share/mbzirc_naive_radar/models
-prepend-non-duplicate;IGN_GAZEBO_SYSTEM_PLUGIN_PATH;/home/bit/mbzirc_ws/install/lib
-prepend-non-duplicate;LD_LIBRARY_PATH;/home/bit/mbzirc_ws/install/lib

@@ -59,6 +59,20 @@ int main(int argc, char * argv[])
       }
   }
 
+  for (int i = 0; i < 7; i++){
+      for (int j = 0; j < 3; j++){
+          std::string topic_name = "model/Vessel_" + std::to_string(char('A' + i)) + subtopic_name[j];
+          handles.push_back(
+                  std::make_unique<ros_ign_bridge::BridgeIgnToRos>(
+                          ros_node, ign_node,
+                          ros_type[j], topic_name,
+                          ign_type[j], topic_name
+                          )
+                  );
+      }
+  }
+
+
 
 
   for (auto & bridge : handles) {
