@@ -556,8 +556,10 @@
         <!-- max_velocity_knots = 1 # Maximum velocity in knots -->
         <!-- max_velocity_mps = max_velocity_knots * 0.5144 # Knots to m/s -->
         <!-- (x_u + x_uu * max_velocity_mps) * max_velocity_mps -->
-        <force>908</force>
-        <torque>200</torque>
+        <!-- <force>908</force> -->
+        <!--<torque>200</torque>  -->
+        <force>0</force>
+        <torque>0</torque>
         <range_tolerance>5</range_tolerance>
         <bearing_tolerance>5</bearing_tolerance>
       </plugin>
