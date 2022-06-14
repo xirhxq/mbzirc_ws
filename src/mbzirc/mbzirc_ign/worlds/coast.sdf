@@ -419,7 +419,7 @@
 
     <include>
       <name>Vessel A</name>
-      <pose>-1375 -25 0.3 0 0.0 -1.0</pose>
+      <pose>-1075 -25 0.3 0 0.0 -1.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel A</uri>
       <plugin
         filename="libSurface.so"
@@ -476,8 +476,8 @@
         <link_name>link</link_name>
         <loop>true</loop>
         <waypoints>
-          <waypoint>-1350 -25</waypoint>
-          <waypoint>-1400 -25</waypoint>
+          <waypoint>-1050 -25</waypoint>
+          <waypoint>-1100 -25</waypoint>
         </waypoints>
         <!-- ~1 knot -->
         <!-- max_velocity_knots = 1 # Maximum velocity in knots -->
