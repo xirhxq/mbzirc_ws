@@ -59,6 +59,19 @@ int main(int argc, char * argv[])
       }
   }
 
+  for (int i = 1; i <= 6; i++){
+      for (int j = 0; j < 3; j++){
+          std::string topic_name = "model/buav_" + std::to_string(i) + subtopic_name[j];
+          handles.push_back(
+                  std::make_unique<ros_ign_bridge::BridgeIgnToRos>(
+                          ros_node, ign_node,
+                          ros_type[j], topic_name,
+                          ign_type[j], topic_name
+                          )
+                  );
+      }
+  }
+
     for (int i = 0; i < 7; i++){
         for (int j = 0; j < 3; j++){
             std::string chara;
