@@ -640,7 +640,7 @@
 
     <include>
       <name>Vessel D</name>
-      <pose>1000 1200 0.4 0 0.0 0.0</pose>
+      <pose>-1200 150 0.4 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel D</uri>
       <plugin
         filename="libSurface.so"
@@ -714,7 +714,7 @@
 
     <include>
       <name>Vessel E</name>
-      <pose>-1000 -500 0.3 0 0.0 0.0</pose>
+      <pose>-1000 -200 0.3 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel E</uri>
       <plugin
         filename="libSurface.so"
