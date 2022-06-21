@@ -98,7 +98,6 @@ To build a docker image of the simulator locally:
  Docker container:
 
     ```
-    cd docker
     bash run.bash mbzirc_sim
     ```
 

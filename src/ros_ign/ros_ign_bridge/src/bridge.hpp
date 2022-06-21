@@ -12,13 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef BRIDGE_HANDLE_HPP_
-#define BRIDGE_HANDLE_HPP_
-
-#include <rclcpp/node.hpp>
-#include <ros_ign_bridge/bridge_config.hpp>
+#ifndef BRIDGE_HPP_
+#define BRIDGE_HPP_
 
 #include <ignition/transport/Node.hh>
+#include <rclcpp/node.hpp>
 
 #include <memory>
 #include <string>
@@ -29,22 +27,40 @@ namespace ros_ign_bridge
 {
 
 /// \brief Core functionality and data for both bridge directions
-class BridgeHandle
+class Bridge
 {
 public:
+  /// \brief Default subscriber queue length
+  static constexpr size_t kDefaultSubscriberQueue = 10;
+
+  /// \brief Default publisher queue length
+  static constexpr size_t kDefaultPublisherQueue = 10;
+
   /// \brief Constructor
   /// Note, does not actually start the bridge, must be done with Start()
   ///
   /// \param[in] ros_node ROS node to create publishers/subscribers on
   /// \param[in] ign_node IGN node to create publishers/subscribers on
-  /// \param[in] config Configuration parameters for this handle
-  BridgeHandle(
+  /// \param[in] ros_type_name Name of the ROS message type to use
+  /// \param[in] ros_topic Name of the ROS topic to use
+  /// \param[in] ign_type_name Name of the IGN message type to use
+  /// \param[in] ign_topic Name of the IGN topic to use
+  /// \param[in] subscriber_queue_size Depth of the subscriber queue
+  /// \param[in] publisher_queue_size Depth of the publisher queue
+  /// \param[in] is_lazy True for "lazy" subscriptions. (Default: false)
+  Bridge(
     rclcpp::Node::SharedPtr ros_node,
     std::shared_ptr<ignition::transport::Node> ign_node,
-    const BridgeConfig & config);
+    const std::string & ros_type_name,
+    const std::string & ros_topic_name,
+    const std::string & ign_type_name,
+    const std::string & ign_topic_name,
+    size_t subscriber_queue_size = kDefaultSubscriberQueue,
+    size_t publisher_queue_size = kDefaultPublisherQueue,
+    bool is_lazy = false);
 
   /// \brief Destructor
-  virtual ~BridgeHandle() = 0;
+  virtual ~Bridge() = 0;
 
   /// \brief Initiate the bridge
   ///
@@ -96,13 +112,33 @@ protected:
   /// \brief The Ignition node used to create publishers/subscriptions
   std::shared_ptr<ignition::transport::Node> ign_node_;
 
-  /// \brief The configuration parameters of this bridge
-  BridgeConfig config_;
+  /// \brief The ROS message type (eg std_msgs/msg/String)
+  std::string ros_type_name_;
+
+  /// \brief The ROS topic name to bridge
+  std::string ros_topic_name_;
+
+  /// \brief The IGN message type (eg ignition.msgs.String)
+  std::string ign_type_name_;
+
+  /// \brief The IGN topic name to bridge
+  std::string ign_topic_name_;
+
+  /// \brief Depth of the subscriber queue
+  size_t subscriber_queue_size_;
+
+  /// \brief Depth of the publisher queue
+  size_t publisher_queue_size_;
+
+  /// \brief Flag to change the "laziness" of the bridge
+  bool is_lazy_;
 
   /// \brief Typed factory used to create publishers/subscribers
   std::shared_ptr<FactoryInterface> factory_;
 };
 
+using BridgePtr = std::unique_ptr<Bridge>;
+
 }  // namespace ros_ign_bridge
 
-#endif  // BRIDGE_HANDLE_HPP_
+#endif  // BRIDGE_HPP_

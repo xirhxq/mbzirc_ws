@@ -13,17 +13,16 @@ class TestModel(unittest.TestCase):
                               'config', 'single_uav_config.yaml')
         with open(config, 'r') as stream:
             model = Model.FromConfig(stream)
-        self.assertTrue(model.is_UAV())
+        self.assertTrue(model.isUAV())
 
         model.generate()
 
         args = model.spawn_args()
         self.assertEqual(len(args), 18)
 
-        [bridges, nodes, launches] = model.bridges('test_world_name')
+        [bridges, nodes] = model.bridges('test_world_name')
         self.assertEqual(len(bridges), 8)
         self.assertEqual(len(nodes), 0)
-        self.assertEqual(len(launches), 0)
 
         [payload_bridges, payload_nodes, launch] = model.payload_bridges('test_world_name')
 
@@ -36,34 +35,32 @@ class TestModel(unittest.TestCase):
                               'config', 'single_uav_with_gripper_config.yaml')
         with open(config, 'r') as stream:
             model = Model.FromConfig(stream)
-        self.assertTrue(model.is_UAV())
+        self.assertTrue(model.isUAV())
 
         model.generate()
 
         args = model.spawn_args()
         self.assertEqual(len(args), 18)
 
-        [bridges, nodes, launches] = model.bridges('test_world_name')
+        [bridges, nodes] = model.bridges('test_world_name')
         self.assertEqual(len(bridges), 13)
         self.assertEqual(len(nodes), 0)
-        self.assertEqual(len(launches), 0)
 
     def test_single_fw_uav_config(self):
         config = os.path.join(get_package_share_directory('mbzirc_ign'),
                               'config', 'single_fw_uav_config.yaml')
         with open(config, 'r') as stream:
             model = Model.FromConfig(stream)
-        self.assertTrue(model.is_UAV())
+        self.assertTrue(model.isUAV())
 
         model.generate()
 
         args = model.spawn_args()
         self.assertEqual(len(args), 18)
 
-        [bridges, nodes, launches] = model.bridges('test_world_name')
+        [bridges, nodes] = model.bridges('test_world_name')
         self.assertEqual(len(bridges), 7)
         self.assertEqual(len(nodes), 0)
-        self.assertEqual(len(launches), 0)
 
         [payload_bridges, payload_nodes, launch] = model.payload_bridges('test_world_name')
 
@@ -77,22 +74,21 @@ class TestModel(unittest.TestCase):
         with open(config, 'r') as stream:
             model = Model.FromConfig(stream)
 
-        self.assertTrue(model.is_USV())
+        self.assertTrue(model.isUSV())
 
         model.generate()
 
         args = model.spawn_args()
         self.assertEqual(len(args), 18)
 
-        [bridges, nodes, launches] = model.bridges('test_world_name')
+        [bridges, nodes] = model.bridges('test_world_name')
         self.assertEqual(len(bridges), 9)
-        self.assertEqual(len(nodes), 1)
-        self.assertEqual(len(launches), 0)
+        self.assertEqual(len(nodes), 0)
 
         [payload_bridges, payload_nodes, launch] = model.payload_bridges('test_world_name')
 
-        self.assertEqual(len(payload_bridges), 14)
-        self.assertEqual(len(payload_nodes), 5)
+        self.assertEqual(len(payload_bridges), 6)
+        self.assertEqual(len(payload_nodes), 1)
         self.assertEqual(len(launch), 0)
 
     def test_single_usv_with_arm_gripper_config(self):
@@ -101,23 +97,16 @@ class TestModel(unittest.TestCase):
         with open(config, 'r') as stream:
             model = Model.FromConfig(stream)
 
-        self.assertTrue(model.is_USV())
+        self.assertTrue(model.isUSV())
 
         model.generate()
 
         args = model.spawn_args()
         self.assertEqual(len(args), 18)
 
-        [bridges, nodes, launches] = model.bridges('test_world_name')
-        self.assertEqual(len(bridges), 22)
+        [bridges, nodes] = model.bridges('test_world_name')
+        self.assertEqual(len(bridges), 24)
         self.assertEqual(len(nodes), 1)
-        self.assertEqual(len(launches), 0)
-
-        [payload_bridges, payload_nodes, launch] = model.payload_bridges('test_world_name')
-
-        self.assertEqual(len(payload_bridges), 6)
-        self.assertEqual(len(payload_nodes), 3)
-        self.assertEqual(len(launch), 0)
 
     def test_coast(self):
         config = os.path.join(get_package_share_directory('mbzirc_ign'),

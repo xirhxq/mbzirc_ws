@@ -11,14 +11,12 @@ end
 
 $attitude_gain = '2 3 0.15'
 $motor_constant = '8.54858e-06'
-if defined?($gripper_model)
-  if $gripper_model.include?('mbzirc_oberon7_gripper')
-    $attitude_gain = '10 10 0.15'
-    $motor_constant = '3.95e-05'
-  elsif $gripper_model.include?('mbzirc_suction_gripper')
-    $attitude_gain = '10 10 0.15'
-    $motor_constant = '2.52e-05'
-  end
+if $gripper_model == 'mbzirc_oberon7_gripper'
+  $attitude_gain = '10 10 0.15'
+  $motor_constant = '3.95e-05'
+elsif $gripper_model == 'mbzirc_suction_gripper'
+  $attitude_gain = '10 10 0.15'
+  $motor_constant = '2.52e-05'
 end
 
 $slot0_payload = nil
@@ -246,8 +244,8 @@ end
       <publish_collision_pose>false</publish_collision_pose>
       <publish_visual_pose>false</publish_visual_pose>
       <publish_nested_model_pose>true</publish_nested_model_pose>
-      <publish_model_pose>false</publish_model_pose>
-      <use_pose_vector_msg>true</use_pose_vector_msg>
+      <publish_model_pose>true</publish_model_pose>
+      <use_pose_vector_msg>false</use_pose_vector_msg>
       <static_publisher>true</static_publisher>
       <static_update_frequency>1</static_update_frequency>
     </plugin>
@@ -259,7 +257,7 @@ end
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>800.0</maxRotVelocity>
+      <maxRotVelocity>1800.0</maxRotVelocity>
       <motorConstant><%= $motor_constant %></motorConstant>
       <momentConstant>0.016</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -278,7 +276,7 @@ end
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>800.0</maxRotVelocity>
+      <maxRotVelocity>1800.0</maxRotVelocity>
       <motorConstant><%= $motor_constant %></motorConstant>
       <momentConstant>0.016</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -297,7 +295,7 @@ end
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>800.0</maxRotVelocity>
+      <maxRotVelocity>1800.0</maxRotVelocity>
       <motorConstant><%= $motor_constant %></motorConstant>
       <momentConstant>0.016</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -316,7 +314,7 @@ end
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>800.0</maxRotVelocity>
+      <maxRotVelocity>1800.0</maxRotVelocity>
       <motorConstant><%= $motor_constant %></motorConstant>
       <momentConstant>0.016</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -340,7 +338,7 @@ end
       <attitudeGain><%= $attitude_gain %></attitudeGain>
       <angularRateGain>0.4 0.52 0.18</angularRateGain>
       <maximumLinearAcceleration>1 1 2</maximumLinearAcceleration>
-      <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
+      <maximumLinearVelocity>15 15 15</maximumLinearVelocity>
       <maximumAngularVelocity>3 3 3</maximumAngularVelocity>
       <linearVelocityNoiseMean>0 0 0.05</linearVelocityNoiseMean>
       <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->

@@ -12,28 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef BRIDGE_HANDLE_ROS_TO_IGN_HPP_
-#define BRIDGE_HANDLE_ROS_TO_IGN_HPP_
+#ifndef BRIDGE_IGN_TO_ROS_HPP_
+#define BRIDGE_IGN_TO_ROS_HPP_
 
 #include <ignition/transport/Node.hh>
 #include <rclcpp/subscription_base.hpp>
 
-#include "bridge_handle.hpp"
+#include <memory>
+
+#include "bridge.hpp"
 
 namespace ros_ign_bridge
 {
 
-/// \brief Create a bridge ROS to IGN Bridge
+/// \brief Create a IGN to ROS Bridge
 ///
-/// Bridge is from ROS Subscription (input) to IGN Publisher (output)
-class BridgeHandleRosToIgn : public BridgeHandle
+/// Bridge is from IGN Subscription (input) to ROS Publisher (output)
+class BridgeIgnToRos : public Bridge
 {
 public:
   /// \brief Constructor
-  using BridgeHandle::BridgeHandle;
+  using Bridge::Bridge;
 
   /// \brief Destructor
-  ~BridgeHandleRosToIgn() override;
+  ~BridgeIgnToRos() override;
 
 protected:
   /// \brief Documentation inherited
@@ -55,13 +57,13 @@ protected:
   void StopSubscriber() override;
 
 protected:
-  /// \brief ROS subscriber, populated when subscription active
-  rclcpp::SubscriptionBase::SharedPtr ros_subscriber_ = {nullptr};
+  /// \brief Ignition subscriber, populated when subscriber active
+  std::shared_ptr<ignition::transport::Node> ign_subscriber_ = {nullptr};
 
-  /// \brief Ignition publisher, populated when publisher active
-  ignition::transport::Node::Publisher ign_publisher_;
+  /// \brief ROS publisher, populated when publisher active
+  rclcpp::PublisherBase::SharedPtr ros_publisher_ = {nullptr};
 };
 
 }  // namespace ros_ign_bridge
 
-#endif  // BRIDGE_HANDLE_ROS_TO_IGN_HPP_
+#endif  // BRIDGE_IGN_TO_ROS_HPP_

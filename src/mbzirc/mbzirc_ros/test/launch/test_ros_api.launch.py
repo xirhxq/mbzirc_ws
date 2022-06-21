@@ -114,8 +114,7 @@ def generate_test_description():
                'z'      : '0.08',
                'arm'    : 'mbzirc_oberon7_arm',
                'gripper': 'mbzirc_oberon7_gripper',}
-    # add hd camera to arm
-    arguments['arm_payload_slot0'] = 'mbzirc_hd_camera'
+
     spawn_usv = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
@@ -160,7 +159,7 @@ def generate_test_description():
 class RosApiTest(unittest.TestCase):
 
     def test_termination(self, process_under_test, proc_info):
-        proc_info.assertWaitForShutdown(process=process_under_test, timeout=300)
+        proc_info.assertWaitForShutdown(process=process_under_test, timeout=280)
 
 @launch_testing.post_shutdown_test()
 class RosApiTestAfterShutdown(unittest.TestCase):
