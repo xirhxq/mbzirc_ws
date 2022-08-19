@@ -52,14 +52,13 @@ int main(int argc, char * argv[]) {
     config.is_lazy = lazy_subscription;
 
 
-    for (int i = 1; i <= 10; i++){
-        for (int j = 0; j < 3; j++){
-            std::string topic_name = "model/suav_" + std::to_string(i) + subtopic_name[j];
+    for (int i = 1; i <= 14; i++){
+            std::string topic_name = "model/suav_" + std::to_string(i) + subtopic_name[2];
 
             config.ros_topic_name = topic_name;
             config.ign_topic_name = topic_name;
-            config.ros_type_name = ros_type[j];
-            config.ign_type_name = ign_type[j];
+            config.ros_type_name = ros_type[2];
+            config.ign_type_name = ign_type[2];
 
             bridge_node->add_bridge(config);
 
@@ -70,19 +69,15 @@ int main(int argc, char * argv[]) {
             //                 ign_type[j], topic_name
             //                 )
             //         );
-        }
+        
     }
-
-    for (int i = 1; i <= 6; i++){
-        for (int j = 0; j < 3; j++){
-            std::string topic_name = "model/buav_" + std::to_string(i) + subtopic_name[j];
-
-
+    for (int i = 1; i <= 3; i++){
+            std::string topic_name = "model/tuav_" + std::to_string(i) + subtopic_name[2];
 
             config.ros_topic_name = topic_name;
             config.ign_topic_name = topic_name;
-            config.ros_type_name = ros_type[j];
-            config.ign_type_name = ign_type[j];
+            config.ros_type_name = ros_type[2];
+            config.ign_type_name = ign_type[2];
 
             bridge_node->add_bridge(config);
 
@@ -93,52 +88,9 @@ int main(int argc, char * argv[]) {
             //                 ign_type[j], topic_name
             //                 )
             //         );
-        }
+        
     }
 
-    for (int i = 0; i < 7; i++){
-        for (int j = 0; j < 3; j++){
-            std::string chara;
-            chara = chara + char('A' + i);
-            std::string topic_name = "model/Vessel_" + chara + subtopic_name[j];
-
-
-
-            config.ros_topic_name = topic_name;
-            config.ign_topic_name = topic_name;
-            config.ros_type_name = ros_type[j];
-            config.ign_type_name = ign_type[j];
-
-            bridge_node->add_bridge(config);
-            // handles.push_back(
-            //         std::make_unique<ros_ign_bridge::BridgeIgnToRos>(
-            //                 ros_node, ign_node,
-            //                 ros_type[j], topic_name,
-            //                 ign_type[j], topic_name
-            //                 )
-            //         );
-        }
-    }
-
-
-    for (int j = 0; j < 3; j++){
-        std::string topic_name = "model/USV" + subtopic_name[j];
-
-
-        config.ros_topic_name = topic_name;
-        config.ign_topic_name = topic_name;
-        config.ros_type_name = ros_type[j];
-        config.ign_type_name = ign_type[j];
-
-        bridge_node->add_bridge(config);
-        // handles.push_back(
-        //         std::make_unique<ros_ign_bridge::BridgeIgnToRos>(
-        //                 ros_node, ign_node,
-        //                 ros_type[j], topic_name,
-        //                 ign_type[j], topic_name
-        //                 )
-        //         );
-    }
 
 
     rclcpp::spin(bridge_node);

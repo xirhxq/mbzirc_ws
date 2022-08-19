@@ -1467,11 +1467,11 @@
         <size>3162.28 3162.28 221.92</size>
       </geofence>
       <target>
-        <vessel>Vessel B</vessel>
-        <small_object>small_case_b</small_object>
-        <small_object>small_case_b_duplicate</small_object>
-        <large_object>large_grey_box_b</large_object>
-        <large_object>large_grey_box_b_duplicate</large_object>
+        <vessel>Vessel E</vessel>
+        <small_object>small_dry_bag_e</small_object>
+        <small_object>small_dry_bag_e_duplicate</small_object>
+        <large_object>large_dry_box_e</large_object>
+        <large_object>large_dry_box_e_duplicate</large_object>
       </target>
     </plugin>
 
